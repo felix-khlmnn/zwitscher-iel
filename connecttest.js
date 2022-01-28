@@ -88,7 +88,7 @@ MongoClient.connect(uri, function(err, db) { //everything inside of here to crea
             for (let i = 0; i < result.length; i++) {
                 const postObj = result[i];
                 console.log(Date.now() - postObj.unixTime + "\n" + postObj.link) // 604800000 =One week in milliseconds
-                if ((Date.now() - postObj.unixTime > 1000000)) {
+                if ((Date.now() - postObj.unixTime > 604800000)) {
                     dbo.collection("links").deleteOne({ link: postObj.link }, (err, obj) => {
                         if (err) throw err;
                         console.log("1 Document deleted for being too old.");
