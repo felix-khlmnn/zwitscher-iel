@@ -29,8 +29,8 @@ MongoClient.connect(uri, function(err, db) { //everything inside of here to crea
     var dbo = db.db("zwitscher-data");
     readRSS();                      //init of readRSS
     checkAge();                     //init of checkAge
-    setInterval(readRSS, 180000);   //Every three hours
-    setInterval(checkAge, 1440000)
+    setInterval(readRSS, 10800000);   //Every three hours
+    setInterval(checkAge, 86400000);
 
 
     async function readRSS() {
@@ -40,7 +40,7 @@ MongoClient.connect(uri, function(err, db) { //everything inside of here to crea
 	}
         const imageURL = "https://i.redd.it/" + feed.items[0].content.split("https://i.redd.it/")[1].split('"')[0];
         console.log(imageURL);
-	if (imageURL.endsWith(".gif") {
+	if (imageURL.endsWith(".gif")) {
 		return;
 	}
         const post = { link: imageURL, unixTime: Date.now() }; //in ms
