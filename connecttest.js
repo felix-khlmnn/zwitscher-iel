@@ -40,7 +40,9 @@ MongoClient.connect(uri, function(err, db) { //everything inside of here to crea
 	}
         const imageURL = "https://i.redd.it/" + feed.items[0].content.split("https://i.redd.it/")[1].split('"')[0];
         console.log(imageURL);
-	
+	if (imageURL.endsWith(".gif") {
+		return;
+	}
         const post = { link: imageURL, unixTime: Date.now() }; //in ms
 
 
