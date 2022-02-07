@@ -29,7 +29,7 @@ MongoClient.connect(uri, function(err, db) { //everything inside of here to crea
     var dbo = db.db("zwitscher-data");
     readRSS();                      //init of readRSS
     checkAge();                     //init of checkAge
-    setInterval(readRSS, 10800000);   //Every three hours
+    setInterval(readRSS, 1800000);   //Every three hours
     setInterval(checkAge, 86400000);
 
 
