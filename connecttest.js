@@ -34,7 +34,7 @@ MongoClient.connect(uri, function(err, db) { //everything inside of here to crea
 
 
     async function readRSS() {
-        let feed = await parser.parseURL('https://www.reddit.com/r/ich_iel/top.rss');
+        let feed = await parser.parseURL('https://www.reddit.com/r/ich_iel/.rss');
 	if (!feed.items[0].content.includes("https://i.redd.it/")) {
 		return;
 	}
