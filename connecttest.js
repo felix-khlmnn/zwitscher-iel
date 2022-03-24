@@ -34,11 +34,13 @@ MongoClient.connect(uri, function(err, db) { //everything inside of here to crea
 
 
     async function readRSS() {
+	var index = 0;
+	
         let feed = await parser.parseURL('https://www.reddit.com/r/ich_iel/.rss');
-	if (!feed.items[0].content.includes("https://i.redd.it/")) {
-		return;
+	if (!feed.items[index].content.includes("https://i.redd.it/")) {
+		index += 1;
 	}
-        const imageURL = "https://i.redd.it/" + feed.items[0].content.split("https://i.redd.it/")[1].split('"')[0];
+        const imageURL = "https://i.redd.it/" + feed.items[index].content.split("https://i.redd.it/")[1].split('"')[0];
         console.log(imageURL);
 	if (imageURL.endsWith(".gif")) {
 		return;
@@ -47,6 +49,7 @@ MongoClient.connect(uri, function(err, db) { //everything inside of here to crea
 
 
         dbo.collection("links").findOne({link: imageURL}, (err, result) => {
+	    if (err) throw err;
             if (result == null) {
                 const file = fs.createWriteStream('downloadpic.jpg');
                 const request = https.get(imageURL, (res) => {
@@ -64,7 +67,7 @@ MongoClient.connect(uri, function(err, db) { //everything inside of here to crea
                                 console.log(media);
     
                                 var status = {
-                                    status: `${feed.items[0].title}\nvon ${feed.items[0].author}`,
+                                    status: `${feed.items[index].title}\nvon ${feed.items[0].author}`,
                                     media_ids: media.media_id_string
                                 }
                                 console.log(status.status + "\n" + status.media_ids)
