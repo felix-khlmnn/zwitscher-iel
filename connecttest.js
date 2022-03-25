@@ -29,12 +29,12 @@ MongoClient.connect(uri, function(err, db) { //everything inside of here to crea
     var dbo = db.db("zwitscher-data");
     readRSS();                      //init of readRSS
     checkAge();                     //init of checkAge
-    setInterval(readRSS, 1800000);   //Every three hours
+    setInterval(readRSS, 900000);   //Every three hours
     setInterval(checkAge, 86400000);
 
 
     async function readRSS() {
-	var index = 0;
+	var index = getRandomInt(5);
 	
         let feed = await parser.parseURL('https://www.reddit.com/r/ich_iel/.rss');
 	if (!feed.items[index].content.includes("https://i.redd.it/")) {
@@ -110,7 +110,9 @@ MongoClient.connect(uri, function(err, db) { //everything inside of here to crea
         
     }
     
-    
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
     
 });
 
