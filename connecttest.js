@@ -67,7 +67,7 @@ MongoClient.connect(uri, function(err, db) { //everything inside of here to crea
                                 console.log(media);
     
                                 var status = {
-                                    status: `${feed.items[index].title}\nvon ${feed.items[0].author}`,
+                                    status: `${feed.items[index].title}\nvon ${feed.items[index].author}`,
                                     media_ids: media.media_id_string
                                 }
                                 console.log(status.status + "\n" + status.media_ids)
